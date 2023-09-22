@@ -26,7 +26,9 @@ new_world_pop <- world_pop %>%
   mutate(year = as.integer(year)) %>% 
   select(-'Indicator Name', -'Indicator Code')
 head(new_world_pop)
+```
 
+```{r}
 # load metadata_country data 
 metadata <- read_csv('data/metadata_country.csv.gz', show_col_types = FALSE)
 head(metadata)
@@ -58,7 +60,9 @@ pop_growth <- pop %>%
   arrange(desc(population_growth)) %>% 
   slice_max(population_growth, n=10) 
 head(pop_growth)
+```
 
+```{r}
 # visualization of top 10 countries
 p <- pop_growth %>% 
   mutate(TableName = reorder(TableName, desc(population_growth))) %>% 
@@ -91,7 +95,9 @@ top_ten_countries <- ave_pop_growth %>%  slice_max(ave_growth_rate, n =10)
 bottom_ten_countries <- ave_pop_growth %>%  slice_min(ave_growth_rate, n =10)
 top_ten_countries
 bottom_ten_countries
+```
 
+```{r}
 top_10 <- top_ten_countries %>% 
   mutate(TableName = reorder(TableName, desc(ave_growth_rate))) %>% 
   ggplot(aes(TableName, ave_growth_rate, fill = TableName)) + 
